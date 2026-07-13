@@ -1,23 +1,20 @@
 class Solution {
     public List<Integer> sequentialDigits(int low, int high) {
 
+        String s = "123456789";   // sliding window on string
         List<Integer> ans = new ArrayList<>();
 
-        for (int start = 1; start <= 9; start++) {
+        for (int len = 2; len <= 9; len++) {
 
-            int num = start;
+            for (int i = 0; i + len <= 9; i++) {
 
-            for (int next = start + 1; next <= 9; next++) {
+                int num = Integer.parseInt(s.substring(i, i + len));
 
-                num = num * 10 + next;
-
-                if (num >= low && num <= high) {
+                if (num >= low && num <= high)
                     ans.add(num);
-                }
             }
         }
 
-        Collections.sort(ans);
         return ans;
     }
 }
