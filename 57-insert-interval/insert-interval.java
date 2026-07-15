@@ -2,12 +2,23 @@ class Solution {
     public int[][] insert(int[][] intervals, int[] newInterval) {
         int n = intervals.length;
         int [][]arr = new int[n+1][];
+        
+        int j = 0;
+        boolean inserted = false;
 
         for (int i = 0; i < n; i++) {
-            arr[i] = intervals[i];
+            if (!inserted && newInterval[0] < intervals[i][0]) {
+                arr[j++] = newInterval;
+                inserted = true;
+            }
+
+            arr[j++] = intervals[i];
         }
-        arr[n]= newInterval;
-        Arrays.sort(arr,(a,b) -> Integer.compare(a[0],b[0]));
+
+        // If newInterval has the largest start time
+        if (!inserted) {
+            arr[j] = newInterval;
+        }
 
         List<int[]>ans = new ArrayList<>();
         int[] prev = arr[0];
