@@ -1,25 +1,25 @@
 class Solution {
-    // t=O(n) ,s = O(n), due to stringbuilder
-    // string compression using two pointers
-    // both loops are taking overall time complexity
     public int compress(char[] chars) {
-        StringBuilder sb = new StringBuilder();
-        int i = 0 ;
-        while(i<chars.length){
-            char c = chars[i];
-            int count = 0;
-            while(i<chars.length && chars[i]==c){
-                count++;
-                i++;
-            }
-            sb.append(c);//put c not chars[i], i is incremented
-            if(count>1){
-                sb.append(count);
+    // t=O(n) , s = O(1)
+    // in place string compression using two pointers
+    // both loops are taking overall time complexity
+    int i= 0;
+    int idx = 0;
+    while(i<chars.length){
+        int count = 0;
+        char c = chars[i];
+        while(i<chars.length && chars[i]==c){
+            count++;
+            i++;
+        }
+        chars[idx++] = c;
+        if(count>1){
+            String num = String.valueOf(count);
+            for(char a :num.toCharArray()){ // if num is more than one digit then it is splitted and stored as char in chars
+                chars[idx++] = a;
             }
         }
-        for(int j=0; j<sb.length();j++){
-            chars[j] = sb.charAt(j); 
-        }       
-        return sb.length();
+    }
+    return idx;
     }
 }
