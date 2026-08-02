@@ -1,29 +1,40 @@
 class MinStack {
-    // two stack approach ,space = O(n)
+    // approach using sinle stack
+    // when a new minimum is pushed, we actually push two values:
+    // one is previous min and second is new min, just to handle when pop is done, so that we have previous minimum value
+    // s = O(n), (better practical space) and O(1) by every operation
     Stack<Integer>stack;
-    Stack<Integer>minStack;
-    public MinStack() {
-        stack=new Stack();
-        minStack=new Stack();
-    }    
-    public void push(int value) {
-        stack.push(value);
-        if(minStack.isEmpty()){      // push() → O(1)
-            minStack.push(value);
+    int min ;
+    public MinStack(){
+        stack = new Stack<>();
+    } 
+    public void push(int value){
+        if(stack.isEmpty()){
+            stack.push(value);
+            min = value;
         }
         else{
-            minStack.push(Math.min(value,minStack.peek()));
+            if(value<=min){
+                stack.push(min);
+                min=value;
+            }
+            stack.push(value);
         }
-    }
-    public void pop() {
-        stack.pop();    //pop() → O(1)
-        minStack.pop();
     }    
-    public int top() {     // top() → O(1)
+    public void pop(){
+        int topp = stack.pop();
+        if(topp == min){
+            if (stack.isEmpty()){
+                return;         // stack became empty
+            }
+            min = stack.pop(); // restore previous minimum
+        }
+    }   
+    public int top() {
         return stack.peek();
-    }
+    }    
     public int getMin() {
-        return minStack.peek();  //getMin() → O(1)
+        return min;
     }
 }
 
