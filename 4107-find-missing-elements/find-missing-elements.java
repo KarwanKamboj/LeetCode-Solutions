@@ -1,4 +1,4 @@
-class Solution { // sorting, t = O(n)
+class Solution { // sorting, t = O(nlogn)
     public List<Integer> findMissingElements(int[] nums) {
         List<Integer> res = new ArrayList<>();
 
