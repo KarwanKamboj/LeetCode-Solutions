@@ -1,21 +1,41 @@
-class MyStack { // space = O(1) 
-    Queue<Integer> q;
+class MyStack { // USING TWO QUEUES
+    Queue<Integer>q1; // main queue
+    Queue<Integer>q2; // temp queue
     public MyStack() {
-        q = new LinkedList<>();
+        q1=new LinkedList<>();
+        q2=new LinkedList<>();
     }
-    public void push(int x) {
-        q.add(x);
-        for (int i = 0; i < q.size() - 1; i++) {  //t = O(n)
-            q.add(q.poll());
+    
+    public void push(int x) {     // O(n)
+        q2.offer(x);   
+        while(!q1.isEmpty()){//move all elements from q1 to q2
+            q2.offer(q1.poll());
         }
+        Queue<Integer>temp=q1;
+        q1=q2;
+        q2=temp ;  // now q2 is empty
+        return;
+
     }
-    public int pop() {
-        return q.poll();  // t = O(1)
+    
+    public int pop() {  //O(1)
+        return q1.poll();
     }
-    public int top() {
-        return q.peek();   // t = O(1)
+    
+    public int top() { //O(1)
+        return q1.peek();
     }
-    public boolean empty() {
-        return q.isEmpty();  // t = O(1)
+    
+    public boolean empty() { //O(1)
+        return q1.isEmpty();
     }
 }
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
