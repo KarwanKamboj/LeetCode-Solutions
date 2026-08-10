@@ -1,27 +1,43 @@
 class Solution {
-    // t= O(n+m), s = O(n+m)
+    //t = O(n+m), s=O(1)
     public boolean backspaceCompare(String s, String t) {
-        Stack<Character>st1=new Stack<>();
-        Stack<Character>st2=new Stack<>();
-        for(char c:s.toCharArray()){
-            if(c!='#'){
-                st1.push(c);
+        int i = s.length()-1;
+        int j = t.length()-1;
+        while(i>=0 ||j>=0){
+            int skip =0 ;
+            while(i>=0){
+                if(s.charAt(i)=='#'){
+                    skip++;
+                    i-- ; // move left
+                }else if(skip>0){
+                    skip--;  //skip that character
+                    i--;
+                }else{
+                    break;  // valid character
+                }
             }
-            else{
-                if(!st1.isEmpty()) st1.pop();
+            skip = 0;
+
+            while(j>=0){
+                if(t.charAt(j) == '#'){
+                    skip++;
+                    j--;
+                }else if(skip>0){
+                    skip--;
+                    j--;
+                }else{
+                    break; // valid character
+                }
             }
+             if(i>=0&&j>=0 &&  s.charAt(i) != t.charAt(j)){
+                return false;
+            } 
+            if ((i>=0)!=(j>=0)){// One has a character and other doesn't
+                return false;
+            }    
+            i--;// Move to next character
+            j--;
         }
-        for(char c:t.toCharArray()){
-            if(c!='#'){
-                st2.push(c);
-            }
-            else{
-                if(!st2.isEmpty()) st2.pop();
-            }
-        }
-        while(!st1.isEmpty() && !st2.isEmpty()){
-            if(st1.pop() != st2.pop()) return false;
-        }
-        return st1.isEmpty() && st2.isEmpty();
-    }
+        return true;
+}
 }
