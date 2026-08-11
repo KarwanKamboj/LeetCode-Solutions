@@ -1,36 +1,30 @@
-class Solution { // t = o(N), s = O(1)
+class Solution { // T = O(N) , S = O(1)
     public int trap(int[] height) {
 
-        int left = 0;
-        int right = height.length - 1;
-
-        int leftMax = 0;
-        int rightMax = 0;
-
+        Stack<Integer> st = new Stack<>();
         int water = 0;
 
-        while (left < right) {
+        for (int i = 0; i < height.length; i++) {
 
-            if (height[left] <= height[right]) {
+            while (!st.isEmpty() && height[i] > height[st.peek()]) {
 
-                if (height[left] >= leftMax) {
-                    leftMax = height[left];
-                } else {
-                    water += leftMax - height[left];
+                int bottom = st.pop();
+
+                if (st.isEmpty()) {
+                    break;
                 }
 
-                left++;
+                int left = st.peek();
 
-            } else {
+                int width = i - left - 1;
 
-                if (height[right] >= rightMax) {
-                    rightMax = height[right];
-                } else {
-                    water += rightMax - height[right];
-                }
+                int h = Math.min(height[left], height[i])
+                        - height[bottom];
 
-                right--;
+                water += width * h;
             }
+
+            st.push(i);
         }
 
         return water;
