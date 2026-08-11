@@ -1,4 +1,4 @@
-class Solution { // T = O(N) , S = O(1)
+class Solution { // T = O(N) , S = O(N)
     public int trap(int[] height) {
 
         Stack<Integer> st = new Stack<>();
