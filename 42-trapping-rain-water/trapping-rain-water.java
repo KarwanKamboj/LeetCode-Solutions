@@ -1,19 +1,28 @@
 class Solution {
+    // t = O(n), s = O(n) , two pointer approach
     public int trap(int[] height) {
-        // t= O(N), S = O(N) USING STACK
-        int n = height.length;
-        int water  = 0;
-        Stack<Integer>st=new Stack<>();
-        for(int i = 0 ; i<n;i++){
-            while(!st.isEmpty() && height[i]>height[st.peek()]){
-                int bottom = st.pop();
-                if(st.isEmpty()) break;
-                int left = st.peek();
-                int width = i-left - 1; // only walls
-                int h = Math.min(height[left],height[i]) - height[bottom];// height of empty space
-                water += width * h;
+        int left = 0;
+        int right = height.length-1;
+        int leftMax = 0;
+        int rightMax = 0;
+        int water = 0;
+        while(left<right){
+            if(height[left]<= height[right]){
+                if(leftMax <= height[left]){
+                    leftMax  = height[left];
+                }else{
+                    water += leftMax -height[left];
+                }
+                left++;
             }
-            st.push(i);
+            else{
+                if(rightMax <= height[right]){
+                    rightMax  = height[right];
+                }else{
+                    water += rightMax -height[right];
+                }
+            right--;
+            }
         }
         return water;
     }
