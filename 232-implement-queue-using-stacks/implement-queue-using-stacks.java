@@ -1,36 +1,37 @@
-class MyQueue {// T = O(n) WORST CASE, S = O(n)
-    Stack<Integer>s1;
-    Stack<Integer>s2;
-
+class MyQueue {//USING ONE STACK
+    // one stack + recursion is followed but it is less practical
+    Stack<Integer>st;
     public MyQueue() {
-        s1 = new Stack<>();
-        s2 = new Stack<>();
+        st = new Stack<>();
     }
     
     public void push(int x) {
-        s1.push(x); // O(1)
+        st.push(x); // o(1)
     }
     
     public int pop() {
-        if(s2.isEmpty()){
-            while(!s1.isEmpty()){
-                s2.push(s1.pop()); // O(N)
-            }
+        if(st.size()==1){
+            return st.pop();
         }
-        return s2.pop();
+        int x = st.pop();  // o(n)
+        int ans = pop();
+        st.push(x);
+        return ans ;
     }
-    // in peek() and pop() both while loops are not executing same time they execute,only when s2 is empty()
+    //The recursion keeps popping and when it reaches to the element we want it stores in ans and then recursion come back and puts elements again
     public int peek() {
-        if(s2.isEmpty()){
-            while(!s1.isEmpty()){
-                s2.push(s1.pop());  //o(n)
-            }
+        if(st.size()==1){  // o(1)
+            return st.peek();
         }
-        return s2.peek();
+        int x = st.pop();
+        int ans = peek();
+        st.push(x);
+        return ans;
+        
     }
-
+    
     public boolean empty() {
-        return s1.isEmpty() && s2.isEmpty();
+        return st.isEmpty();
     }
 }
 
