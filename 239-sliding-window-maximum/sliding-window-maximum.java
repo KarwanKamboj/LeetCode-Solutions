@@ -11,10 +11,10 @@ class Solution { // USING DEQUE , T = O(N), S = O(K)
                 d.pollFirst(); // remove outside element
             }
             while(!d.isEmpty() && nums[d.peekLast()]<=nums[i]){
-                d.pollLast();
+                d.pollLast(); // remove smaller element from back to keep dequeue in decreasing order
             }
             d.offerLast(i);
-            if(i>=k-1){
+            if(i>=k-1){ // when window size is less in starting it is false otherwise it is true after 1 indx
                 result[idx] = nums[d.peekFirst()];
                 idx++;
             }
