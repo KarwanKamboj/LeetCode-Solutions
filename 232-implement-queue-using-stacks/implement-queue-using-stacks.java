@@ -1,4 +1,4 @@
-class MyQueue {
+class MyQueue {// T = O(n) WORST CASE, S = O(n)
     Stack<Integer>s1;
     Stack<Integer>s2;
 
@@ -19,7 +19,7 @@ class MyQueue {
         }
         return s2.pop();
     }
-    
+    // in peek() and pop() both while loops are not executing same time they execute,only when s2 is empty()
     public int peek() {
         if(s2.isEmpty()){
             while(!s1.isEmpty()){
@@ -28,7 +28,7 @@ class MyQueue {
         }
         return s2.peek();
     }
-    
+
     public boolean empty() {
         return s1.isEmpty() && s2.isEmpty();
     }
