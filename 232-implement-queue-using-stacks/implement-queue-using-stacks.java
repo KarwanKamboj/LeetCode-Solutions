@@ -12,29 +12,25 @@ class MyQueue {
     }
     
     public int pop() {
-        while(!s1.isEmpty()){  // O(N)
-            s2.push(s1.pop());
+        if(s2.isEmpty()){
+            while(!s1.isEmpty()){
+                s2.push(s1.pop()); // O(N)
+            }
         }
-        int ans = s2.pop();
-        while(!s2.isEmpty()){
-            s1.push(s2.pop());
-        }
-        return ans;
+        return s2.pop();
     }
     
     public int peek() {
-        while(!s1.isEmpty()){ // O(N)
-            s2.push(s1.pop());
+        if(s2.isEmpty()){
+            while(!s1.isEmpty()){
+                s2.push(s1.pop());  //o(n)
+            }
         }
-        int ans = s2.peek();
-        while(!s2.isEmpty()){
-            s1.push(s2.pop());
-        }
-        return ans;
+        return s2.peek();
     }
     
     public boolean empty() {
-        return s1.isEmpty();
+        return s1.isEmpty() && s2.isEmpty();
     }
 }
 
