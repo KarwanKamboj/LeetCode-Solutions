@@ -1,43 +1,42 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        
-        int ans[] = new int[2];
-        ans[0] = leftSearch(nums,target);
-        ans[1] = rightSearch(nums,target);
-        return ans ;
+        int left  = 0;
+        int right  = nums.length-1;
+        int ans[] = {-1,-1};
+        ans[0] = leftSearch(left,right,nums,target);
+        ans[1] = rightSearch(left,right,nums,target);
+        return ans;
     }
-    private int leftSearch(int[] nums,int target){
-        int low =0 ;
-        int high = nums.length -1;
-        int idx = -1;
-        while(low<=high){
-            int mid = low + (high-low)/2;
+    private int leftSearch(int left, int right,int[] nums,int target){
+        int ans = -1;
+        while(left<=right){
+            int mid = left+(right-left)/2;
             if(nums[mid]==target){
-                idx = mid;
-                high = mid-1;
+                ans = mid;
+                right = mid -1;  // to search left most
             }else if(nums[mid]<target){
-                low = mid + 1;
-            }else{
-                high = mid-1;
+                left = mid + 1;   
+            }
+            else{
+                right = mid - 1;
             }
         }
-        return idx;
+        return ans;
     }
-    private int rightSearch(int[] nums,int target){
-        int low =0 ;
-        int high = nums.length -1;
-        int idx = -1;
-        while(low<=high){
-            int mid = low + (high-low)/2;
+    private int rightSearch(int left, int right, int nums[], int target){
+        int ans = -1;
+        while(left<=right){
+            int mid = left+(right-left)/2;
             if(nums[mid]==target){
-                idx = mid;
-                low = mid+1;
+                ans = mid;
+                left = mid + 1; // to search rightmost
             }else if(nums[mid]<target){
-                low = mid+1;                
-            }else{
-                high = mid -1;
+                left = mid + 1;   
+            }
+            else{
+                right = mid - 1;
             }
         }
-        return idx;
+        return ans;
     }
 }
