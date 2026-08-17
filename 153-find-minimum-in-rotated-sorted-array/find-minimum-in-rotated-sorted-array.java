@@ -1,4 +1,5 @@
 class Solution {
+    //left == right, only one elemnt is left that must be minimum
     public int findMin(int[] nums) {
         int left= 0;
         int right = nums.length-1;
