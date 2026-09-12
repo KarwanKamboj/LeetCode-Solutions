@@ -1,8 +1,8 @@
-class Solution {
+class Solution {// t = O(nlogn), s = O(1), using sorting
     public void merge(int[] nums1, int m, int[] nums2, int n) {
-         int j = 0 ;
-        for(int i = m ; i  < m+n ; i++){
-            nums1[i] = nums2[j++];
+        while(n>0){
+            nums1[m] = nums2[--n];
+            m++;
         }
         Arrays.sort(nums1);
     }
