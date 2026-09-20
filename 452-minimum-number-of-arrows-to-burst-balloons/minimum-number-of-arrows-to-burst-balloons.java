@@ -1,4 +1,4 @@
-class Solution { // greedy algo , t = O(1),s = O(1)
+class Solution { // greedy algo , t = O(n),s = O(1)
     public int findMinArrowShots(int[][] points) {
         Arrays.sort(points,(a,b)->Integer.compare(a[1],b[1]));
         int end = points[0][1];
