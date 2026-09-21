@@ -1,19 +1,18 @@
 class Solution {
     public int majorityElement(int[] nums) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-
-        for (int num : nums) {
-            map.put(num, map.getOrDefault(num, 0) + 1);
-        }
-
-        int ans = nums[0];
-
-        for (int key : map.keySet()) {
-            if (map.get(key) > map.get(ans)) {
-                ans = key;
+        // Boyr Moore Majority voting algorithm , t = O(n), S = O(1)
+        int count = 0;
+        int candidate = 0;
+        for(int i=0;i<nums.length;i++){
+            if(count==0){
+               candidate = nums[i];
+            }
+            if(nums[i]==candidate){
+                count++;
+            }else{
+                count--;
             }
         }
-
-        return ans;
+        return candidate;
     }
 }
