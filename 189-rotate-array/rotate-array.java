@@ -1,18 +1,16 @@
-class Solution { // t = O(n) ,s = O(1)
+class Solution { // t = O(n) , s = O(n)
     public void rotate(int[] nums, int k) {
-        int n = nums.length;
-        k = k%n;
-        reverse(nums,0,n-1); // reverse all
-        reverse(nums,0,k-1); // reverse first k elements
-        reverse(nums,k,n-1); // reverse remaining k elements
-    }
-    private void reverse(int nums[],int left,int right){
-        while(left<right){
-            int temp = nums[left];
-            nums[left] = nums[right];
-            nums[right] = temp;
-            left++;
-            right--;
+        int n =nums.length;
+        int temp[] = new int[n];
+      
+        for(int i = 0 ;i<n;i++){
+            int newIndex = (i+k)%n;
+            temp[newIndex] = nums[i];
+            newIndex++;
         }
+        for(int i = 0 ;i<n;i++){
+            nums[i] = temp[i];
+        }
+        return;
     }
 }
