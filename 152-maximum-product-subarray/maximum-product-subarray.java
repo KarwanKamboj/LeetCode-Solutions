@@ -1,18 +1,20 @@
 class Solution {// t = O(n), s = O(1)
     public int maxProduct(int[] nums) {
         int max = nums[0];
-        int prefix = 1;
-        int suffix = 1;
-
+        int maxProduct = nums[0];
+        int minProduct = nums[0];
         int n = nums.length;
        
-        for(int i = 0;i<n;i++){
-          if(prefix == 0) prefix=1;
-          if(suffix == 0) suffix =1;
+        for(int i = 1;i<n;i++){
+            if(nums[i]<0){
+                int temp = maxProduct;
+                maxProduct = minProduct;
+                minProduct = temp;
+            }
+            maxProduct = Math.max(nums[i],nums[i]*maxProduct);
+            minProduct = Math.min(nums[i],nums[i]*minProduct);
 
-            prefix = prefix*nums[i];
-            suffix = suffix*nums[n-i-1];
-          max = Math.max(max,Math.max(prefix,suffix));
+            max = Math.max(max,maxProduct);
         }
         return max ;
     }
