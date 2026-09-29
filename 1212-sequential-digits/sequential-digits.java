@@ -1,20 +1,16 @@
-class Solution {
+class Solution {// list size is bounded t= O(n),s s = O(1)
     public List<Integer> sequentialDigits(int low, int high) {
-
-        String s = "123456789";   // sliding window on string
-        List<Integer> ans = new ArrayList<>();
-
-        for (int len = 2; len <= 9; len++) {
-
-            for (int i = 0; i + len <= 9; i++) {
-
-                int num = Integer.parseInt(s.substring(i, i + len));
-
-                if (num >= low && num <= high)
+        List<Integer>ans = new ArrayList<>();
+        for(int start = 1; start<=9; start++){
+            int num = start;
+            for(int next = start+1;next<=9;next++){
+                num = num*10 + next;
+                if(num>=low && num <= high){
                     ans.add(num);
+                }
             }
         }
-
+        Collections.sort(ans);
         return ans;
     }
 }
