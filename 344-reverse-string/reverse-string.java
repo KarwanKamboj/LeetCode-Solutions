@@ -1,13 +1,13 @@
-class Solution {
+class Solution {// t = O(n), s = O(n)
+    private void solve(int left,int right, char[] s){
+        if(left>=right) return;
+        char temp = s[left];
+        s[left]  = s[right];
+        s[right] = temp;
+        solve(left+1,right-1,s);
+    }
     public void reverseString(char[] s) {
-        int left = 0;
-        int right = s.length-1;
-        while(left<=right){
-            char temp = s[left];
-            s[left] = s[right];
-            s[right] = temp;
-            left++;
-            right--;
-        }
+        int n = s.length;
+        solve(0,n-1,s);
     }
 }
