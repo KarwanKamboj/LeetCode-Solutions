@@ -1,27 +1,25 @@
 class Solution {
-    // t = O(n), s = O(n) , two pointer approach
     public int trap(int[] height) {
+        int water = 0;
         int left = 0;
         int right = height.length-1;
-        int leftMax = 0;
-        int rightMax = 0;
-        int water = 0;
+        int leftmax = 0;
+        int rightmax = 0;
         while(left<right){
-            if(height[left]<= height[right]){
-                if(leftMax <= height[left]){
-                    leftMax  = height[left];
+            if(height[left]<=height[right]){
+                if(height[left]>leftmax){
+                    leftmax = height[left];
                 }else{
-                    water += leftMax -height[left];
+                    water += leftmax-height[left];
                 }
                 left++;
-            }
-            else{
-                if(rightMax <= height[right]){
-                    rightMax  = height[right];
+            }else{
+                if(height[right]>rightmax){
+                    rightmax = height[right];
                 }else{
-                    water += rightMax -height[right];
+                    water += rightmax-height[right];
                 }
-            right--;
+                right--;
             }
         }
         return water;
