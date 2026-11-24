@@ -43,3 +43,6 @@ class Solution {
         return a;
     }
 }
+// product(arr) = gcd(arr) * lcm(arr), it holds when gcd of all elements is 1means they are co prime for n>2
+// so insstead of calaculating lcm we are checking only  gcd == 1 or not and deciding only on basis of that
+// also if gcd(arr) ==1 , then product(arr) = lcm(arr) automatically
